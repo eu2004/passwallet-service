@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Wrapper<T> {
-    private Collection<T> items;
+    private final Collection<T> items;
 
     public Wrapper() {
         items = new ArrayList<>();

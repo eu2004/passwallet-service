@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Collection;
 
 public class XMLFileService<T> implements IXMLFileService<T> {
-    private XMLFileHelper<T> xmlFileHelper;
-    private CryptographyService cryptographyService;
-    private String xmlFilePath;
+    private final XMLFileHelper<T> xmlFileHelper;
+    private final CryptographyService cryptographyService;
+    private final String xmlFilePath;
 
 
     public XMLFileService(String password, String xmlFilePath, Class<T> objectClass) {

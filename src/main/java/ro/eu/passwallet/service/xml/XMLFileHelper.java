@@ -1,6 +1,7 @@
 package ro.eu.passwallet.service.xml;
 
 import jakarta.xml.bind.*;
+
 import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -10,9 +11,10 @@ import java.util.Collection;
 public class XMLFileHelper<T> {
 
     protected JAXBContext jaxbContext;
+    private final Class<Wrapper<T>> wrapperClass = (Class<Wrapper<T>>) new Wrapper<>().getClass();
 
     public XMLFileHelper(Class<T> classObject) throws JAXBException {
-        jaxbContext = JAXBContext.newInstance(new Wrapper<T>().getClass(), classObject);
+        jaxbContext = JAXBContext.newInstance(wrapperClass, classObject);
     }
 
     public byte[] getXMLFileContent(String xmlFilePath) throws IOException {
@@ -53,7 +55,7 @@ public class XMLFileHelper<T> {
     protected Collection<T> unmarshal(Unmarshaller unmarshaller, byte[] xmlFileContent) throws JAXBException {
         StreamSource xml = new StreamSource(new ByteArrayInputStream(xmlFileContent));
         Wrapper<T> wrapper = unmarshaller.unmarshal(xml,
-                new Wrapper<T>().getClass()).getValue();
+                wrapperClass).getValue();
         return wrapper.getItems();
     }
 
@@ -66,7 +68,7 @@ public class XMLFileHelper<T> {
         QName qName = new QName(name);
         Wrapper<T> wrapper = new Wrapper<>(collection);
         JAXBElement<Wrapper<T>> jaxbElement = new JAXBElement<>(qName,
-                (Class<Wrapper<T>>) wrapper.getClass(), wrapper);
+                wrapperClass, wrapper);
         StreamResult out = new StreamResult(xmlOut);
         marshaller.marshal(jaxbElement, out);
     }

@@ -5,13 +5,13 @@ import ro.eu.passwallet.model.UserAccount;
 import java.util.Collection;
 
 public interface IUserAccountDAO {
-    public UserAccount findUserAccountById(Integer id);
+    UserAccount findUserAccountById(Integer id);
 
-    public Collection<UserAccount> findAllUsersAccounts();
+    Collection<UserAccount> findAllUsersAccounts();
 
     Collection<UserAccount> findUsersAccountsByName(String name);
 
-    public Integer createUserAccount(UserAccount userAccount);
+    Integer createUserAccount(UserAccount userAccount);
 
     boolean deleteUserAccountById(Integer id);
 

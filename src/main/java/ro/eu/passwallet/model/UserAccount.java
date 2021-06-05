@@ -2,6 +2,7 @@ package ro.eu.passwallet.model;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Objects;
 
 @XmlRootElement
 public class UserAccount implements Serializable {
@@ -82,9 +83,9 @@ public class UserAccount implements Serializable {
         if (!id.equals(that.id)) return false;
         if (!name.equals(that.name)) return false;
         if (!password.equals(that.password)) return false;
-        if (siteURL != null ? !siteURL.equals(that.siteURL) : that.siteURL != null) return false;
-        if (nickName != null ? !nickName.equals(that.nickName) : that.nickName != null) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
+        if (!Objects.equals(siteURL, that.siteURL)) return false;
+        if (!Objects.equals(nickName, that.nickName)) return false;
+        return Objects.equals(description, that.description);
     }
 
     @Override

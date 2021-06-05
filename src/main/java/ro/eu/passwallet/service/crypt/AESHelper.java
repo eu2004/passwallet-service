@@ -2,7 +2,7 @@ package ro.eu.passwallet.service.crypt;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -11,12 +11,12 @@ public final class AESHelper {
 
     private SecretKeySpec generateKey(String password) {
         try {
-            byte[] key = password.getBytes("UTF-8");
+            byte[] key = password.getBytes(StandardCharsets.UTF_8);
             MessageDigest sha = MessageDigest.getInstance("SHA-1");
             key = sha.digest(key);
             key = Arrays.copyOf(key, 16);
             return new SecretKeySpec(key, "AES");
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new CryptographyException(e);
         }
     }

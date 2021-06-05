@@ -4,9 +4,7 @@ import ro.eu.passwallet.model.UserAccount;
 import ro.eu.passwallet.service.LoggerService;
 import ro.eu.passwallet.service.xml.XMLFileService;
 
-import jakarta.xml.bind.JAXBException;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -62,7 +60,7 @@ public class TestUserAccountXMLDAO extends CommonTest {
 
     private static void testFindUsersAccountsByName(UserAccountXMLDAO userAccountXMLDAO) {
         Collection<UserAccount> usersAccounts = userAccountXMLDAO.findUsersAccountsByName("nickname_");
-        if (usersAccounts != null && usersAccounts.size() > 0) {
+        if (usersAccounts.size() > 0) {
             logger.info(usersAccounts.toString());
             logger.info("testFindUsersAccountsByName is OK");
         } else {
@@ -71,7 +69,7 @@ public class TestUserAccountXMLDAO extends CommonTest {
     }
 
     private static void testFindAllUsers(UserAccountXMLDAO userAccountXMLDAO) {
-        boolean testOK = userAccountXMLDAO.findAllUsersAccounts() != null;
+        boolean testOK = userAccountXMLDAO.findAllUsersAccounts().size() > 0;
         if (testOK) {
             logger.info("testFindAllUsers is OK!");
         } else {
@@ -79,7 +77,7 @@ public class TestUserAccountXMLDAO extends CommonTest {
         }
     }
 
-    private static void createXMLFile(XMLFileService xmlFileService) throws JAXBException, IOException {
+    private static void createXMLFile(XMLFileService<UserAccount> xmlFileService) {
         Collection<UserAccount> usersAccounts = new ArrayList<>();
         usersAccounts.add(createUserAccount(1));
         usersAccounts.add(createUserAccount(2));

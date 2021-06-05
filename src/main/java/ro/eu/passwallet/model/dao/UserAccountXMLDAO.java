@@ -7,17 +7,18 @@ import ro.eu.passwallet.service.xml.XMLFileServiceException;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 public final class UserAccountXMLDAO implements IUserAccountDAO {
-    private IXMLFileService xmlFileService;
-    private ILoggerService loggerService;
+    private final IXMLFileService<UserAccount> xmlFileService;
+    private final ILoggerService loggerService;
 
-    private Collection<UserAccount> allUserAccounts;
+    private final Collection<UserAccount> allUserAccounts;
 
-    public UserAccountXMLDAO(IXMLFileService xmlFileService, ILoggerService loggerService) {
+    public UserAccountXMLDAO(IXMLFileService<UserAccount> xmlFileService, ILoggerService loggerService) {
         this.xmlFileService = xmlFileService;
         this.loggerService = loggerService;
         try {
@@ -38,7 +39,7 @@ public final class UserAccountXMLDAO implements IUserAccountDAO {
         }
 
         List<UserAccount> userAccounts = allUserAccounts.stream().filter(t -> t.getId().equals(id)).collect(toList());
-        if (userAccounts != null && userAccounts.size() > 0) {
+        if (userAccounts.size() > 0) {
             return userAccounts.get(0);
         }
         return null;
@@ -59,7 +60,7 @@ public final class UserAccountXMLDAO implements IUserAccountDAO {
         List<UserAccount> userAccounts = allUserAccounts.stream().filter(t -> t.getName().toUpperCase().contains(ignoreCaseName)
                 || t.getNickName().toUpperCase().contains(ignoreCaseName)
                 || t.getSiteURL().toUpperCase().contains(ignoreCaseName)).collect(toList());
-        if (userAccounts != null && userAccounts.size() > 0) {
+        if (userAccounts.size() > 0) {
             return userAccounts;
         }
         return Collections.emptyList();
@@ -75,7 +76,7 @@ public final class UserAccountXMLDAO implements IUserAccountDAO {
         synchronized (UserAccountXMLDAO.class) {
             Integer maxId = -1;
             if (!allUserAccounts.isEmpty()) {
-                UserAccount maxUserAccount = allUserAccounts.stream().max((t1, t2) -> t1.getId().compareTo(t2.getId())).get();
+                UserAccount maxUserAccount = allUserAccounts.stream().max(Comparator.comparing(UserAccount::getId)).get();
                 maxId = maxUserAccount.getId();
             }
             userAccount.setId(maxId + 1);

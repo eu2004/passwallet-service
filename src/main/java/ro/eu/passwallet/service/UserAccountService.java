@@ -6,7 +6,7 @@ import ro.eu.passwallet.model.dao.IUserAccountDAO;
 import java.util.Collection;
 
 public final class UserAccountService {
-    private IUserAccountDAO userAccountDAO;
+    private final IUserAccountDAO userAccountDAO;
 
     public UserAccountService(IUserAccountDAO userAccountDAO) {
         if (userAccountDAO == null) {

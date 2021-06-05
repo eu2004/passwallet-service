@@ -1,11 +1,11 @@
 package ro.eu.passwallet.service.crypt;
 
 public final class CryptographyService {
-    private AESHelper aesHelper = new AESHelper();
-    private String password;
+    private final AESHelper aesHelper = new AESHelper();
+    private final String password;
 
     public CryptographyService(String password) {
-        this.password = new String(password);
+        this.password = password;
     }
 
     public byte[] encrypt(byte[] stringToEncrypt) {
