@@ -1,0 +1,38 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+/.idea/
+/*.iml
+target/
+.svn/
+dist/jre1.8.0_144/
+target/classes/ro/eu/passwallet/client/flexui/open_passwallet_ui.fxml
+target/classes/ro/eu/passwallet/client/flexui/manage_passwallet_ui.fxml
+target/classes/ro/eu/passwallet/client/flexui/edit_user_account_ui.fxml
+target/classes/ro/eu/passwallet/client/flexui/create_passwallet_ui.fxml
+target/classes/ro/eu/passwallet/client/flexui/add_user_account_ui.fxml
+.idea
+target
+/passwallet.log.lck
