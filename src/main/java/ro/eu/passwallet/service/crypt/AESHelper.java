@@ -11,7 +11,7 @@ class AESHelper {
     private final String secretKeyAlgorithm;
 
     public AESHelper() {
-        this("SHA3-512", "AES");
+        this("SHA512", "AES");
     }
 
     protected AESHelper(String messageDigestAlgorithm, String secretKeyAlgorithm) {
