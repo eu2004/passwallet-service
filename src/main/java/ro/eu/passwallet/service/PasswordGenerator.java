@@ -12,6 +12,7 @@ public class PasswordGenerator {
     private boolean includeUpperCase = true;
 
     static final String SYMBOLS = "!@#$%^&*()_";
+    static final String NUMBERS = "0123456789";
     static final String LOWERCASE = "abcdefghijklmnopqrstuvxyz";
     static final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
 
@@ -77,9 +78,7 @@ public class PasswordGenerator {
         int index = 0;
         while (index < shuffledIndexes.length) {
             int lastShuffledIndex = shuffledRandom.nextInt(shuffledIndexes.length);
-            if (index == 0) {
-                shuffledIndexes[index] = lastShuffledIndex;
-            } else {
+            if (index != 0) {
                 boolean lastShuffledIndexAlreadyGenerated = true;
                 while (lastShuffledIndexAlreadyGenerated) {
                     lastShuffledIndexAlreadyGenerated = false;
@@ -91,8 +90,8 @@ public class PasswordGenerator {
                         }
                     }
                 }
-                shuffledIndexes[index] = lastShuffledIndex;
             }
+            shuffledIndexes[index] = lastShuffledIndex;
             index++;
         }
 
@@ -150,7 +149,8 @@ public class PasswordGenerator {
     }
 
     private int getRandomNumber() {
-        return randomNumber.nextInt(10);
+        final int randomIndex = randomNumber.nextInt(NUMBERS.length());
+        return Integer.parseInt(String.valueOf(NUMBERS.charAt(randomIndex)));
     }
 
     public int getLength() {
