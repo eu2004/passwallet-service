@@ -30,6 +30,11 @@ public class PasswordGenerator {
     }
 
     public String generate() {
+        //return "" if nothing selected
+        if (!includeNumbers && !includeLowerCase && !includeUpperCase && !includeSymbols) {
+            return "";
+        }
+
         StringBuilder generatedPassword = new StringBuilder();
         int ratioOfGroupOfCharsLength = getRatioOfGroupOfCharsLength();
         List<Operations> appliedOperations = getAppliedOperations();

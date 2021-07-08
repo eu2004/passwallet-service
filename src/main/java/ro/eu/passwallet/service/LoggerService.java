@@ -15,7 +15,7 @@ public class LoggerService implements ILoggerService{
     private static final LogManager logManager = LogManager.getLogManager();
     static {
         try {
-            logManager.readConfiguration(LoggerService.class.getResourceAsStream("/logging.properties"));
+            logManager.readConfiguration(LoggerService.class.getClassLoader().getResourceAsStream("logging.properties"));
         } catch (IOException exception) {
             LOGGER.log(Level.SEVERE, "Exception occur", exception);
         }
